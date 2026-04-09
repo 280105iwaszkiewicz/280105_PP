@@ -1,0 +1,39 @@
+class TennisGame1:
+    def __init__(self, player1_name, player2_name):
+        self.player1_name = player1_name
+        self.player2_name = player2_name
+        self.p1_points = 0
+        self.p2_points = 0
+
+#Zdefiniowanie nazw punktów w jednym miejscu
+        self.score_names = {0: "Love", 1: "Fifteen", 2: "Thirty", 3: "Forty"}
+
+def won_point(self, player_name):
+#Porównujemy z rzeczywistą nazwą gracza z __init__, a nie z napisem "player1".
+    if player_name == self.player1_name:
+        self.p1_points += 1
+    else:
+        self.p2_points += 1
+
+def score(self):
+#Podział na 3 czytelne opcje (remis, koniec gry, zwykły wynik).
+
+#Obsługa remisu
+    if self.p1_points == self.p2_points:
+        return f"{self.score_names[self.p1_points]}-All" if self.p1_points < 3 else "Deuce"
+
+#Obsługa przewagi i wygranej (przeniesiona do dedykowanej metody)
+    if self.p1_points >= 4 or self.p2_points >= 4:
+        return self._get_endgame_score()
+
+#Standardowy wynik (użycie f-stringa zamiast pętli for i temp_score)
+    return f"{self.score_names[self.p1_points]}-{self.score_names[self.p2_points]}"
+
+def _get_endgame_score(self):
+#Używamy abs() i dynamicznego wyłaniania lidera
+    diff = self.p1_points - self.p2_points
+    leader = self.player1_name if diff > 0 else self.player2_name
+
+    if abs(diff) == 1:
+        return f"Advantage {leader}"
+    return f"Win for {leader}"
